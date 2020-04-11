@@ -18,7 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->group(['prefix' => 'api'],function () use ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'autenticador'],function () use ($router) {
     $router->group(['prefix' => 'series'], function () use ($router) {
         $router->get('', 'SeriesController@index');
         $router->get('{id}', 'SeriesController@show');
@@ -26,7 +26,7 @@ $router->group(['prefix' => 'api'],function () use ($router) {
         $router->delete('{id}', 'SeriesController@destroy');
         $router->post('', 'SeriesController@store');
 
-        $router->get('{serie_id}/episodios', 'EpisodiosController@buscaPorSerie');
+        $router->get('{serie_id}/episodios ', 'EpisodiosController@buscaPorSerie');
     });
     $router->group(['prefix' => 'episodios'], function () use ($router) {
         $router->get('', 'EpisodiosController@index');
@@ -36,3 +36,5 @@ $router->group(['prefix' => 'api'],function () use ($router) {
         $router->post('', 'EpisodiosController@store');
     });
 });
+
+$router->post('/api/login', 'TokenController@gerarToken');
