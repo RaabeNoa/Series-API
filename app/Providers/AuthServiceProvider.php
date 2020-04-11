@@ -33,15 +33,15 @@ class AuthServiceProvider extends ServiceProvider
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
 
-        $this->app['auth']->viaRequest('api', function (Request $request) {
-            if (!$request->hasHeader('Authorization')) {
-                return null;
-            }
-            $authorizationHeader = $request->header('Authorization');
-            $token = str_replace('Bearer ', '', $authorizationHeader);
-            $dadosAutenticacao = JWT::decode($token, env('JWT_KEY'), ['HS256']); /* ['HS256'] -> UM DOS ALGORITMOS SUPORTADOS PELA BIBLIOTECA 'firebase/php-jwt' PARA DECODIFICAR O TOKEN*/
-
-            return User::where('email', $dadosAutenticacao->email)->first();
-        });
+//        $this->app['auth']->viaRequest('api', function (Request $request) {
+//            if (!$request->hasHeader('Authorization')) {
+//                return null;
+//            }
+//            $authorizationHeader = $request->header('Authorization');
+//            $token = str_replace('Bearer ', '', $authorizationHeader);
+//            $dadosAutenticacao = JWT::decode($token, env('JWT_KEY'), ['HS256']); /* ['HS256'] -> UM DOS ALGORITMOS SUPORTADOS PELA BIBLIOTECA 'firebase/php-jwt' PARA DECODIFICAR O TOKEN*/
+//
+//            return User::where('email', $dadosAutenticacao->email)->first();
+//        });
     }
 }
